@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Map Test</string>
+
+    <string name="yandex_map_key" translatable="false">d2411cce-9abb-4239-9ec4-7cf8f03f8c81</string>
 </resources>
