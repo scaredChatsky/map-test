@@ -1,4 +1,4 @@
-package com.example.maptest
+package com.example.maptest.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
