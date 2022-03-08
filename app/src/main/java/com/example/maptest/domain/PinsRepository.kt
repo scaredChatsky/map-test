@@ -1,6 +1,6 @@
 package com.example.maptest.domain
 
-import com.example.maptest.data.model.Pin
+import com.example.maptest.domain.model.Pin
 
 interface PinsRepository {
 
