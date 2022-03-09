@@ -5,5 +5,4 @@ import com.example.maptest.domain.model.Pin
 interface PinsRepository {
 
     fun getPins(): List<Pin>
-    fun getServices(): List<String>
 }

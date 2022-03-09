@@ -1,7 +1,9 @@
 package com.example.maptest.di
 
 import com.example.maptest.data.PinsRepositoryImpl
+import com.example.maptest.data.ServicesRepositoryImpl
 import com.example.maptest.domain.PinsRepository
+import com.example.maptest.domain.ServicesRepository
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 import com.google.gson.Gson
@@ -33,4 +35,7 @@ interface AppModule {
 
     @Binds
     fun bindPinsRepository(pinsRepositoryImpl: PinsRepositoryImpl): PinsRepository
+
+    @Binds
+    fun bindServicesRepository(servicesRepositoryImpl: ServicesRepositoryImpl): ServicesRepository
 }

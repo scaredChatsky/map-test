@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import com.example.maptest.databinding.FragmentMapBinding
 import com.example.maptest.domain.model.Pin
@@ -27,6 +28,15 @@ class MapFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMapBinding.inflate(inflater, container, false)
         return binding?.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setFragmentResultListener(FILTER_REQUEST_CODE) { requestKey, _ ->
+            if (requestKey != FILTER_REQUEST_CODE) return@setFragmentResultListener
+            mapViewModel.refreshPins()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,5 +63,10 @@ class MapFragment : Fragment() {
                 setIcon(ImageProvider.fromBitmap(servicePinHelper.create(pin.serviceName)))
             }
         }
+    }
+
+    companion object {
+
+        const val FILTER_REQUEST_CODE = "FILTER_REQUEST_CODE"
     }
 }

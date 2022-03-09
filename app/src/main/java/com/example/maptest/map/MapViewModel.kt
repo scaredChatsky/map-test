@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    getPinsUseCase: GetPinsUseCase,
+    private val getPinsUseCase: GetPinsUseCase,
     private val router: Router
 ) : ViewModel() {
 
@@ -20,10 +20,14 @@ class MapViewModel @Inject constructor(
     val pins: LiveData<List<Pin>> = _pins
 
     init {
-        _pins.value = getPinsUseCase()
+        refreshPins()
     }
 
     fun onFilterClick() {
         router.navigateTo(Screens.FiltersScreen)
+    }
+
+    fun refreshPins() {
+        _pins.value = getPinsUseCase()
     }
 }

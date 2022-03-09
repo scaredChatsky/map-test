@@ -3,9 +3,9 @@ package com.example.maptest.domain
 import com.example.maptest.domain.model.Service
 import javax.inject.Inject
 
-class GetServicesUseCase @Inject constructor(
+class GetDisabledServicesUseCase @Inject constructor(
     private val servicesRepository: ServicesRepository
 ) {
 
-    operator fun invoke(): List<Service> = servicesRepository.getServices()
+    operator fun invoke(): Set<Service> = servicesRepository.getDisabledServices()
 }
