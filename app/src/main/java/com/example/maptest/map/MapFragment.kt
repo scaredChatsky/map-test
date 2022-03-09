@@ -14,12 +14,15 @@ import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.runtime.image.ImageProvider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapFragment : Fragment() {
 
     private val mapViewModel: MapViewModel by viewModels()
     private var binding: FragmentMapBinding? = null
+
+    @Inject lateinit var servicePinHelper: ServicePinHelper
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMapBinding.inflate(inflater, container, false)
@@ -37,6 +40,8 @@ class MapFragment : Fragment() {
             )
 
             mapViewModel.pins.observe(viewLifecycleOwner) { pins -> drawPins(mapview, pins) }
+
+            fabFilter.setOnClickListener { mapViewModel.onFilterClick() }
         }
     }
 
@@ -45,7 +50,7 @@ class MapFragment : Fragment() {
 
         pins.forEach { pin ->
             mapObjects.addPlacemark(Point(pin.coordinates.lat, pin.coordinates.lng)).apply {
-                setIcon(ImageProvider.fromBitmap(ServicePinHelper.create(pin.serviceName)))
+                setIcon(ImageProvider.fromBitmap(servicePinHelper.create(pin.serviceName)))
             }
         }
     }

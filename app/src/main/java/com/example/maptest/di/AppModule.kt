@@ -2,6 +2,8 @@ package com.example.maptest.di
 
 import com.example.maptest.data.PinsRepositoryImpl
 import com.example.maptest.domain.PinsRepository
+import com.github.terrakok.cicerone.Cicerone
+import com.github.terrakok.cicerone.Router
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Binds
@@ -20,6 +22,13 @@ interface AppModule {
         @Provides
         @Singleton
         fun provideGson(): Gson = GsonBuilder().create()
+
+        @Provides
+        @Singleton
+        fun provideCicerone(): Cicerone<Router> = Cicerone.create()
+
+        @Provides
+        fun provideRouter(cicerone: Cicerone<Router>): Router = cicerone.router
     }
 
     @Binds

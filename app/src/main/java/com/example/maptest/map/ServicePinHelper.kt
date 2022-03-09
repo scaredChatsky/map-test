@@ -1,12 +1,16 @@
 package com.example.maptest.map
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import com.example.maptest.R
 import com.example.maptest.dpToPx
+import dagger.hilt.android.qualifiers.ActivityContext
+import javax.inject.Inject
 
-object ServicePinHelper {
+class ServicePinHelper @Inject constructor(@ActivityContext private val context: Context) {
 
     fun create(serviceName: String): Bitmap {
         val width = 24.dpToPx
@@ -18,7 +22,7 @@ object ServicePinHelper {
 
     private fun drawText(text: String, canvas: Canvas, width: Int, height: Int) {
         val paint = Paint()
-        paint.color = Color.BLUE
+        paint.color = context.getColor(R.color.purple_200)
         paint.style = Paint.Style.FILL
         val centerX = width / 2f
         val centerY = height / 2f
